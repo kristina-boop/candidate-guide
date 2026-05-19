@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ANTHROP\C - Security Team Overview</title>
+    <link href="https://fonts.googleapis.com/css2?family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Work Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #f2e8d5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            width: 60%;
+            margin: 0 auto;
+            padding: 40px 0;
+            display: flex;
+            flex-direction: column;
+            gap: 30px;
+        }
+
+        .banner {
+            background-color: #CC785C;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><defs><pattern id="grid" width="10" height="10" patternUnits="userSpaceOnUse"><path d="M 10 0 L 0 0 0 10" fill="none" stroke="%23ffffff" stroke-width="0.5" opacity="0.1"/></pattern></defs><rect width="100" height="100" fill="url(%23grid)"/></svg>');
+            border-radius: 12px;
+            padding: 60px 40px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .banner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
+            pointer-events: none;
+        }
+
+        .banner h1 {
+            font-size: 32px;
+            font-weight: 700;
+            color: #000000;
+            letter-spacing: 0.5px;
+            margin-bottom: 8px;
+            z-index: 1;
+        }
+
+        .banner .tagline {
+            font-size: 18px;
+            font-weight: 400;
+            color: #000000;
+            z-index: 1;
+        }
+
+        .section {
+            background: white;
+            border-radius: 12px;
+            padding: 30px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        }
+
+        .section.pillar-section {
+            background: #D8D5E8;
+            padding: 50px;
+        }
+
+        .section.teams-section {
+            background: #B8C5A7;
+        }
+
+        .section.roles-section {
+            background: #5988c1;
+        }
+
+        .section.interview-section {
+            background: #c36f57;
+        }
+
+        .section.key-info-section {
+            background: #d4a574;
+        }
+
+        .section.publications-section {
+            background: #e5c2c4;
+        }
+
+        .section-title {
+            font-size: 20px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 30px;
+            padding-bottom: 15px;
+            border-bottom: 1.5px solid rgba(0,0,0,0.2);
+        }
+
+        .pillar-diagram {
+            text-align: center;
+            padding: 20px;
+        }
+
+        .pillar-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+            margin-bottom: 0;
+        }
+
+        .pillar-box {
+            background: white;
+            border-radius: 8px;
+            padding: 12px 20px;
+            font-size: 13px;
+            font-weight: 600;
+            color: #000000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 48px;
+            text-align: center;
+        }
+
+        .pillar-column > .pillar-box {
+            border: 1.5px solid rgba(0,0,0,0.45);
+        }
+
+        .pillar-column {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            flex: 1;
+        }
+
+        .connector-line {
+            width: 1.5px;
+            height: 30px;
+            background: #aaa;
+            margin: 8px 0;
+        }
+
+        .pillar-children {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .pillar-children .pillar-box {
+            font-weight: 400;
+        }
+
+        .pillar-subrow {
+            display: flex;
+            justify-content: space-around;
+            gap: 15px;
+            margin: 15px 0;
+            flex-wrap: wrap;
+        }
+
+        .pillar-subgroup {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            flex: 1;
+            min-width: 200px;
+        }
+
+        .pillar-connector {
+            font-size: 18px;
+            color: #000000;
+            margin: 5px 0;
+        }
+
+        .confidential-callout {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .confidential-callout h3 {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 10px;
+        }
+
+        .confidential-callout p {
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .team-item {
+            background: white;
+            border-radius: 8px;
+            padding: 25px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .team-title {
+            font-size: 15px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+
+        .team-description {
+            font-size: 14px;
+            line-height: 1.7;
+            color: #333;
+        }
+
+        .roles-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 15px;
+        }
+
+        .role-item {
+            background: white;
+            border-radius: 8px;
+            padding: 20px;
+            text-align: left;
+        }
+
+        .role-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 5px;
+        }
+
+        .role-title a {
+            color: #000000;
+            text-decoration: none;
+            border-bottom: 1px solid rgba(0,0,0,0.2);
+            padding-bottom: 1px;
+        }
+
+        .role-title a:hover {
+            border-bottom: 2px solid #000000;
+        }
+
+        .role-level {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .interview-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+
+        .interview-track {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .track-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .interview-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .step-number {
+            background: #c36f57;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-size: 13px;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 5px;
+        }
+
+        .step-content p {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.5;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 25px;
+        }
+
+        .info-card {
+            background: white;
+            border-radius: 12px;
+            padding: 25px;
+        }
+
+        .info-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #000000;
+            margin-bottom: 15px;
+        }
+
+        .tech-list, .culture-list, .benefits-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .tech-list li, .culture-list li, .benefits-list li {
+            padding: 4px 0;
+            font-size: 14px;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        .tech-list li::before {
+            content: '• ';
+            color: #000000;
+            font-weight: bold;
+        }
+
+        .culture-list li::before {
+            content: '• ';
+            color: #000000;
+            font-weight: bold;
+        }
+
+        .benefits-list li::before {
+            content: '• ';
+            color: #000000;
+            font-weight: bold;
+        }
+
+        .publications-list {
+            list-style: none;
+            padding: 0;
+        }
+
+        .publications-list li {
+            margin-bottom: 10px;
+        }
+
+        .publications-list a {
+            color: #000000;
+            text-decoration: none;
+            font-size: 14px;
+            border-bottom: 1px solid rgba(0,0,0,0.2);
+            padding-bottom: 2px;
+        }
+
+        .publications-list a:hover {
+            border-bottom: 2px solid #000000;
+        }
+
+        @media print {
+            body {
+                background: white;
+                color: black;
+            }
+            
+            .container {
+                width: 100%;
+                padding: 20px 0;
+                gap: 20px;
+            }
+            
+            .section {
+                break-inside: avoid;
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="banner">
+            <h1>ANTHROP\C</h1>
+            <div class="tagline">Security Team Overview / Candidate Guide</div>
+        </div>
+
+        <!-- Team Pillars -->
+        <section class="section pillar-section">
+            <h2 class="section-title">Team Pillars</h2>
+            
+            <div class="pillar-diagram">
+                <div class="pillar-row">
+                    <!-- Platform Security with children -->
+                    <div class="pillar-column">
+                        <div class="pillar-box">Platform Security</div>
+                        <div class="connector-line"></div>
+                        <div class="pillar-children">
+                            <div class="pillar-box">Identity and Secrets</div>
+                            <div class="pillar-box">Secure Frameworks</div>
+                            <div class="pillar-box">Developer Security</div>
+                            <div class="pillar-box">Infrastructure Security</div>
+                        </div>
+                    </div>
+
+                    <!-- Security Enablement with children -->
+                    <div class="pillar-column">
+                        <div class="pillar-box">Security Enablement</div>
+                        <div class="connector-line"></div>
+                        <div class="pillar-children">
+                            <div class="pillar-box">Application Security</div>
+                        </div>
+                    </div>
+
+                    <!-- Detection & Response with children -->
+                    <div class="pillar-column">
+                        <div class="pillar-box">Detection &amp; Response</div>
+                        <div class="connector-line"></div>
+                        <div class="pillar-children">
+                            <div class="pillar-box">Detection Platform Infrastructure</div>
+                            <div class="pillar-box">Incidents, Investigations, Intel (i3)</div>
+                        </div>
+                    </div>
+
+                    <!-- Hardware (Security) with children -->
+                    <div class="pillar-column">
+                        <div class="pillar-box">Hardware (Security)</div>
+                        <div class="connector-line"></div>
+                        <div class="pillar-children">
+                            <div class="pillar-box">Platform Hardware Security</div>
+                            <div class="pillar-box">Platform Security Engineer, Operating Systems</div>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div style="display: flex; justify-content: center; gap: 30px; margin-top: 30px;">
+                    <div class="pillar-box" style="border: 1.5px solid rgba(0,0,0,0.45);">Compliance</div>
+                    <div class="pillar-box" style="border: 1.5px solid rgba(0,0,0,0.45);">IT &amp; Corporate</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Security Teams -->
+        <section class="section teams-section">
+            <h2 class="section-title">Security Teams</h2>
+            
+            <div class="team-grid">
+                <div class="team-item">
+                    <h3 class="team-title">Application Security</h3>
+                    <div class="team-description">
+                        Leading threat modeling, securing design reviews, and continuous risk assessment to proactively identify and mitigate risks early before they ship.
+                        <br><br>
+                        We build the tools and systems that help developers ship code securely at scale, from automated code review tooling to vulnerability prioritization pipelines. We manage Anthropic's vulnerability management program end-to-end — ingesting data, coding triage logic, supporting remediation, and driving automation. We also run the bug bounty program: setting scope, validating submissions, performing root cause analysis, coordinating fixes with engineering teams, and cultivating relationships with the ethical hacker community.
+                        <br><br>
+                        Our work sits at the frontier of AI/ML security, where we're tackling industry-novel risks that push established security boundaries. We drive Anthropic's "shift left" strategy, embedding security into the software development lifecycle so that every engineer can be a security champion. That means developing the standards, policies, playbooks, and training that make secure practices the default — not an afterthought.
+                        <br><br>
+                        This is a team that thinks like attackers, builds like developers, and partners like teammates.
+                    </div>
+                </div>
+
+                <div class="team-item">
+                    <h3 class="team-title">Infrastructure Security</h3>
+                    <div class="team-description">
+                        Implementing and maintaining cloud security controls including IAM, network segmentation, VPC architecture, and encryption across our multi-cloud and on-prem environments.
+                        <br><br>
+                        We contribute to cluster security controls including RBAC policies, namespace isolation, workload identity, and pod security.
+                        <br><br>
+                        We contribute to continuous cloud security posture management using infrastructure-as-code scanning, misconfiguration detection, and automated remediation.
+                        <br><br>
+                        We partner closely with core infrastructure, compute, and identity teams to ensure security is never a blocker for new compute environments while maintaining strong security posture across Anthropic's clusters. This means owning network egress controls, cluster access and RBAC, cloud security fundamentals, and container hardening — the foundational layers that everything else runs on.
+                    </div>
+                </div>
+
+                <div class="team-item">
+                    <h3 class="team-title">Developer Security</h3>
+                    <div class="team-description">
+                        Building and advancing our developer security program by embedding security practices into the software development lifecycle and developer workflows.
+                        <br><br>
+                        We harden CI/CD pipelines against supply chain attacks through isolated build environments, signed attestations, dependency verification, and automated policy enforcement.
+                        <br><br>
+                        We're securing every stage of the software supply chain — from the moment an engineer opens their IDE to the moment code is running in production. Our goal is secure development environments fed into verified builds, which deploy onto attested infrastructure, closing the loop from code to production.
+                        <br><br>
+                        We own the integrity, auditability, and authorization of everything that gets built and shipped. Grounded in SLSA principles, we deliver secure builds with provenance tracking, binary authorization, artifact signing, and reproducible infrastructure-as-code environments. The team ensures that software powering sensitive environments has verifiable integrity guarantees — that sources and dependencies come from verified origins, and that deployments are logged and inventoried.
+                    </div>
+                </div>
+
+                <div class="team-item">
+                    <h3 class="team-title">Identity and Secrets</h3>
+                    <div class="team-description">
+                        Building the foundational systems that govern who, and what, can access Anthropic's most sensitive assets, as well as the security controls to run agents safely at scale.
+                        <br><br>
+                        We design, implement, and maintain the infrastructure for managing identities, controlling access, and protecting critical secrets across research and development environments.
+                        <br><br>
+                        At the core of our work is building a unified authorization platform for all humans at Anthropic: a single control plane for managing access across cloud environments and the many applications the company relies on. Alongside human identity, we adapt these systems to support long-running agents that autonomously perform hours of research and workflow tasks — a new class of identity that demands rethinking traditional access models.
+                        <br><br>
+                        We own public key infrastructure, service authorization, and secrets management, architecting the systems that protect Anthropic's most critical assets including model weights, customer data, and training datasets. This includes building and operating credential issuance, rotation, and workload authentication across multi-cloud environments — ensuring that the right entities have the right access at the right time, and nothing more.
+                    </div>
+                </div>
+
+                <div class="team-item">
+                    <h3 class="team-title">Secure Frameworks</h3>
+                    <div class="team-description">
+                        Building the security primitives that everyone else builds on. Operating above the infrastructure layer, the team develops and maintains secure-by-default frameworks, libraries, and services that enable research and development teams to move fast without sacrificing security.
+                        <br><br>
+                        Our team philosophy is high leverage: Own the critical foundations — cryptographic frameworks, mTLS infrastructure, secure serialization, authorization systems — so that entire classes of vulnerabilities are eliminated by design, and engineering teams can work securely without needing to become security experts themselves.
+                        <br><br>
+                        Our goal is to make the secure thing easy and the easy thing secure.
+                        <br><br>
+                        We partner closely with product, research, infrastructure, and other security teams to ensure these frameworks integrate cleanly with lower-layer controls, targeting the highest-risk areas with solutions that stakeholders genuinely want to use.
+                        <br><br>
+                        Where the team can't build everything, it strategizes selectively — maximizing security impact while expanding security ownership across the company.
+                    </div>
+                </div>
+
+                <div class="team-item">
+                    <h3 class="team-title">Incident Response, Investigations and Intelligence, i3</h3>
+                    <div class="team-description">
+                        We stand on the front lines of Anthropic's security posture, leading response efforts across diverse domains — from external attacks to insider threats — spanning every layer of the technology stack.
+                        <br><br>
+                        We rapidly investigate incidents, coordinate response across engineering and security teams, and drive the continuous improvement of detection playbooks, workflows, and response procedures.
+                        <br><br>
+                        We build forward by developing and deploying novel tooling that leverages large language models to enhance detection, investigation, and response capabilities. By pairing deep incident response expertise with innovative automation, we ensure Anthropic can identify and contain threats quickly as the company's attack surface evolves alongside its research.
+                    </div>
+                </div>
+
+                <div class="team-item">
+                    <h3 class="team-title">Detection Platform, Infrastructure</h3>
+                    <div class="team-description">
+                        Building and scaling Anthropic's next-generation security analytics infrastructure. The team architects the data pipelines that ingest and process massive volumes of security telemetry across a rapidly growing environment, and designs the storage and query systems that make that data actionable at speed.
+                        <br><br>
+                        At the center of our work is an AI-powered platform that spans the full detection and response lifecycle — from detection development to incident response.
+                        <br><br>
+                        We develop ML-powered detection systems and creates innovative tooling that leverages Claude to transform how security operations work at Anthropic, combining rapid prototyping with production-grade engineering to stay ahead of emerging threats.
+                        <br><br>
+                        We partner closely with security and infrastructure teams to translate requirements into scalable solutions, and plays a key role in mentoring engineers and growing the broader security organization.
+                    </div>
+                </div>
+
+
+                <div class="team-item">
+                    <h3 class="team-title">Platform Security Engineer, Operating Systems (Hardware Security)</h3>
+                    <div class="team-description">
+                        We harden and secure the operating system layer that underpins Anthropic's entire infrastructure. Working with cutting-edge hardware and environments that don't exist anywhere else, we design and implement OS-level security controls — from kernel hardening and secure boot to runtime protection and full-disk encryption — ensuring systems can withstand sophisticated attacks without compromising the performance required for AI model training at unprecedented scale.
+                        <br><br>
+                        Our work spans minimizing attack surfaces across kernelspace and userspace, developing kernel security policies and custom Linux Security Modules, building OS-level attestation and integrity monitoring, and designing privilege separation and mandatory access control.
+                        <br><br>
+                        We also maintain secure update mechanisms, builds configuration management and compliance tooling, and partners with container teams to ensure proper workload isolation at the kernel level.
+                        <br><br>
+                        Every decision balances extreme security requirements against the operational needs of researchers training frontier models.
+                    </div>
+                </div>
+
+                <div class="team-item">
+                    <h3 class="team-title">Platform Hardware Security (Hardware Security)</h3>
+                    <div class="team-description">
+                        Our team architects security from the ground up.
+                        <br><br>
+                        Starting at the firmware layer, we design and implement secure boot chains, attestation systems, and integrity monitoring across diverse hardware platforms including CPUs, BMCs, switches, peripherals, and embedded microcontrollers.
+                        <br><br>
+                        Our core mission is ensuring cryptographic proof of system state from hardware root of trust through the application layer, building the foundation that makes higher-level security controls meaningful. This includes developing measured boot implementations, creating reference architectures for bare-metal deployments, conducting firmware vulnerability assessments, and building analysis pipelines for continuous security monitoring.
+                        <br><br>
+                        We work closely with software and hardware vendors to ensure security capabilities meet Anthropic's requirements, and partners with infrastructure teams to integrate controls without impacting training performance across a massive fleet.
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Open Roles -->
+        <section class="section roles-section">
+            <h2 class="section-title">Open Roles</h2>
+            
+            <div class="roles-grid">
+                <div class="role-item">
+                    <h3 class="role-title"><a href="https://job-boards.greenhouse.io/anthropic/jobs/5120512008" target="_blank">Staff+ Software Security Engineer</a></h3>
+                </div>
+                <div class="role-item">
+                    <h3 class="role-title"><a href="https://job-boards.greenhouse.io/anthropic/jobs/4887959008" target="_blank">Senior Software Security Engineer</a></h3>
+                </div>
+                <div class="role-item">
+                    <h3 class="role-title"><a href="https://job-boards.greenhouse.io/anthropic/jobs/4502508008" target="_blank">Application Security Engineer</a></h3>
+                </div>
+                <div class="role-item">
+                    <h3 class="role-title"><a href="https://job-boards.greenhouse.io/anthropic/jobs/4595463008" target="_blank">Security Software Engineer, Detection &amp; Response Platform</a></h3>
+                </div>
+                <div class="role-item">
+                    <h3 class="role-title"><a href="https://job-boards.greenhouse.io/anthropic/jobs/4982193008" target="_blank">Security Engineer, Detection &amp; Response</a></h3>
+                </div>
+                <div class="role-item">
+                    <h3 class="role-title"><a href="https://job-boards.greenhouse.io/anthropic/jobs/5105509008" target="_blank">Security Engineer, Offensive Security</a></h3>
+                </div>
+                <div class="role-item">
+                    <h3 class="role-title"><a href="https://job-boards.greenhouse.io/anthropic/jobs/5153564008" target="_blank">Security Labs</a></h3>
+                </div>
+                <div class="role-item">
+                    <h3 class="role-title"><a href="https://job-boards.greenhouse.io/anthropic/jobs/5135098008" target="_blank">Security Engineer Lead, Corporate Security</a></h3>
+                </div>
+                <div class="role-item">
+                    <h3 class="role-title"><a href="https://job-boards.greenhouse.io/anthropic/jobs/5022845008" target="_blank">Senior / Staff Security Engineer (London, UK)</a></h3>
+                </div>
+                <div class="role-item">
+                    <h3 class="role-title"><a href="https://job-boards.greenhouse.io/anthropic/jobs/5108521008" target="_blank">Senior Security Software Engineer, eBPF &amp; Security Sensors (Zürich, CH)</a></h3>
+                </div>
+                <div class="role-item">
+                    <h3 class="role-title"><a href="https://job-boards.greenhouse.io/anthropic/jobs/5135098008" target="_blank">Senior Security Engineer, Detection &amp; Response (Zürich, CH)</a></h3>
+                </div>
+                <div class="role-item">
+                    <h3 class="role-title"><a href="https://job-boards.greenhouse.io/anthropic/jobs/5071506008" target="_blank">Engineering Manager, Detection and Response (Zürich, CH)</a></h3>
+                </div>
+            </div>
+        </section>
+
+        <!-- Interview Process -->
+        <section class="section interview-section">
+            <h2 class="section-title">Interview Process</h2>
+            
+            <div style="background: white; border-radius: 8px; padding: 15px 20px; margin-bottom: 20px;">
+                <p style="font-size: 14px; font-style: italic; color: #333; margin: 0;">Note that interview steps are subject to change. We may include additional interviews.</p>
+            </div>
+
+            <div class="interview-grid">
+                <div class="interview-track">
+                    <h3 class="track-title">IC</h3>
+                    <div class="interview-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Coding</h4>
+                            <p>Evaluate technical problem-solving abilities</p>
+                        </div>
+                    </div>
+                    <div class="interview-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>System Design</h4>
+                            <p>Design scalable, secure, and reliable systems to solve a complex problem</p>
+                        </div>
+                    </div>
+                    <div class="interview-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Technical Project Discussion</h4>
+                            <p>Present a chosen technical project</p>
+                        </div>
+                    </div>
+                    <div class="interview-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Virtual Onsite</h4>
+                            <p>Technical deep dives, system design, and team collaboration discussions (2-day split)</p>
+                        </div>
+                    </div>
+                    <div class="interview-step">
+                        <div class="step-number">5</div>
+                        <div class="step-content">
+                            <h4>Reference Checks</h4>
+                            <p>Conversations with professional references</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="interview-track">
+                    <h3 class="track-title">Engineering Manager</h3>
+                    <div class="interview-step">
+                        <div class="step-number">1</div>
+                        <div class="step-content">
+                            <h4>Strategy and Execution</h4>
+                            <p>Discuss specific examples from your leadership roles</p>
+                        </div>
+                    </div>
+                    <div class="interview-step">
+                        <div class="step-number">2</div>
+                        <div class="step-content">
+                            <h4>Technical Project Discussion</h4>
+                            <p>Present a chosen technical project</p>
+                        </div>
+                    </div>
+                    <div class="interview-step">
+                        <div class="step-number">3</div>
+                        <div class="step-content">
+                            <h4>Virtual Onsite</h4>
+                            <p>People leadership, security system design, team collaboration</p>
+                        </div>
+                    </div>
+                    <div class="interview-step">
+                        <div class="step-number">4</div>
+                        <div class="step-content">
+                            <h4>Reference Checks</h4>
+                            <p>Conversations with professional references</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Key Information -->
+        <section class="section key-info-section">
+            <h2 class="section-title">Key Information</h2>
+            
+            <div class="info-grid">
+                <div class="info-card">
+                    <h3 class="info-title">Technology Stack</h3>
+                    <ul class="tech-list">
+                        <li>Cloud: GCP, AWS</li>
+                        <li>Languages: Python, Go, TypeScript, Rust</li>
+                        <li>Infrastructure: Kubernetes, Terraform</li>
+                        <li>Security Tools: SIEM, EDR, CASB, Custom tooling</li>
+                        <li>CI/CD: GitHub Actions, CircleCI</li>
+                    </ul>
+                </div>
+
+                <div class="info-card">
+                    <h3 class="info-title">Company Culture</h3>
+                    <ul class="culture-list">
+                        <li>Safety-first approach to AI development</li>
+                        <li>Collaborative, research-driven environment</li>
+                        <li>Emphasis on responsible AI practices</li>
+                        <li>Transparent communication and knowledge sharing</li>
+                        <li>Continuous learning and professional development</li>
+                    </ul>
+                </div>
+
+                <div class="info-card" style="grid-column: 1 / -1;">
+                    <h3 class="info-title">Benefits & Perks</h3>
+                    <ul class="benefits-list">
+                        <li>Comprehensive health, dental, and vision insurance for you and your dependents</li>
+                        <li>Inclusive fertility benefits via Carrot Fertility</li>
+                        <li>22 weeks of paid parental leave</li>
+                        <li>Flexible paid time off and absence policies</li>
+                        <li>Generous mental health support for you and your dependents</li>
+                        <li>Competitive salary and equity packages</li>
+                        <li>Optional equity donation matching at a 1:1 ratio, up to 25% of your equity grant</li>
+                        <li>Robust retirement plans and salary sacrifice programs with market competitive matching</li>
+                        <li>Life and income protection plans</li>
+                        <li>$500/month flexible wellness and time saver stipend</li>
+                        <li>Commuter benefits</li>
+                        <li>Annual education stipend</li>
+                        <li>Home office stipends</li>
+                        <li>Relocation support for those moving for Anthropic</li>
+                        <li>Daily meals and snacks in the office</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Publications -->
+        <section class="section publications-section">
+            <h2 class="section-title">Publications</h2>
+            
+            <div style="background: white; border-radius: 8px; padding: 20px;">
+                <ul class="publications-list">
+                    <li><a href="https://www.anthropic.com/responsible-scaling-policy" target="_blank">Anthropic's Responsible Scaling Policy</a></li>
+                    <li><a href="https://www.anthropic.com/news/core-views-on-ai-safety" target="_blank">Core Views on AI Safety</a></li>
+                    <li><a href="https://www.anthropic.com/research" target="_blank">Anthropic Research</a></li>
+                    <li><a href="https://www.anthropic.com/news/frontier-model-security" target="_blank">Anthropic's Frontier Model Security</a></li>
+                    <li><a href="https://www.anthropic.com/news/claude-code-security" target="_blank">Claude Code Security</a></li>
+                    <li><a href="https://red.anthropic.com/" target="_blank">Frontier Red Team Research Blog</a></li>
+                    <li><a href="https://www.anthropic.com/engineering" target="_blank">Engineering Blog</a></li>
+                    <li><a href="https://red.anthropic.com/2026/mythos-preview/" target="_blank">Assessing Claude Mythos Preview's cybersecurity capabilities</a></li>
+                    <li><a href="https://www.anthropic.com/glasswing" target="_blank">Project Glasswing</a></li>
+                    <li><a href="https://darioamodei.com/machines-of-loving-grace" target="_blank">Dario's 'Machines of Loving Grace'</a></li>
+                    <li><a href="https://www.darioamodei.com/essay/the-adolescence-of-technology" target="_blank">Dario's 'The Adolescence of Technology'</a></li>
+                </ul>
+            </div>
+        </section>
+    </div>
+</body>
+</html>
